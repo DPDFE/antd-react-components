@@ -1,6 +1,6 @@
 {
-  "name": "rc-select",
-  "version": "13.2.0",
+  "name": "@dpdfe/rc-pinyin-select",
+  "version": "0.0.7",
   "description": "React Select",
   "engines": {
     "node": ">=8.x"
@@ -30,10 +30,11 @@
   },
   "license": "MIT",
   "scripts": {
+    "dev": "npm run start",
     "start": "dumi dev",
     "build": "dumi build",
     "compile": "father build",
-    "prepublishOnly": "npm run compile && np --yolo --no-publish",
+    "pub": "npm run compile && npm publish --access public",
     "lint": "eslint src/ docs/examples/ --ext .tsx,.ts,.jsx,.js",
     "test": "father test",
     "tsc": "tsc --noEmit",
@@ -45,6 +46,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.10.1",
+    "@dpdfe/tools": "^0.0.5",
     "classnames": "2.x",
     "rc-motion": "^2.0.1",
     "rc-overflow": "^1.0.0",

@@ -15,6 +15,7 @@ import type {
 } from '../interface/generator';
 
 import { toArray } from './commonUtil';
+import { pinYinFuzzSearch } from '@dpdfe/tools';
 
 function getKey(data: OptionData | OptionGroupData, index: number) {
   const { key } = data;
@@ -204,7 +205,10 @@ export function filterOptions(
   {
     optionFilterProp,
     filterOption,
-  }: { optionFilterProp: string; filterOption: boolean | FilterFunc<SelectOptionsType[number]> },
+  }: {
+    optionFilterProp: string;
+    filterOption: boolean | FilterFunc<SelectOptionsType[number]> | 'pinyin';
+  },
 ) {
   const filteredOptions: SelectOptionsType = [];
   let filterFunc: FilterFunc<SelectOptionsType[number]>;
@@ -214,6 +218,37 @@ export function filterOptions(
   }
   if (typeof filterOption === 'function') {
     filterFunc = filterOption;
+  } else if (filterOption === 'pinyin') {
+    const res = pinYinFuzzSearch(searchValue, options, {
+      textProvider: (item) => {
+        // Group should check child options
+        if ('options' in item) {
+          const matchGroup = pinYinFuzzSearch(searchValue, [item], {
+            textProvider: (i) => i[optionFilterProp].toString(),
+          });
+
+          if (matchGroup.length) {
+            filteredOptions.push(item);
+          } else {
+            const subOptions: any = pinYinFuzzSearch(searchValue, item.options, {
+              textProvider: (i) => i[optionFilterProp].toString(),
+            });
+
+            if (subOptions.length) {
+              filteredOptions.push({
+                ...item,
+                options: subOptions,
+              });
+            }
+          }
+        }
+        return toRawString(item[optionFilterProp]);
+      },
+    });
+
+    filteredOptions.push(...res);
+
+    return filteredOptions;
   } else {
     filterFunc = getFilterFunction(optionFilterProp);
   }

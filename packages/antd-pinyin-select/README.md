@@ -1,10 +1,6 @@
-# antd-react-components
+# antd-pinyin-select
 
-antd react 组件库拓展
-
-## antd-pinyin-select
-
--   二次封装 antd 的 Select 组件，支持拼音模糊搜索
+二次封装 antd 的 Select 组件，支持拼音模糊搜索
 
 ### 安装
 
@@ -40,28 +36,6 @@ antd react 组件库拓展
                 }
             ]
         ]
-    }
-
-    ```
-
-## rc-pinyin-select
-
--   改造 antd Select 依赖的 rc-select，使 Select 支持拼音搜索
-
-### 安装
-
-    `npm install --save @dpdfe/rc-pinyin-select`
-
-### 使用方式
-
-    ```javascript
-    // file: webpack.config.js
-    {
-        resolve: {
-            alias: {
-                'rc-select': '@dpdfe/rc-pinyin-select',
-            }
-        }
     }
 
     ```

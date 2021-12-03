@@ -465,9 +465,22 @@ export default function generateSelector<
       if (!mergedSearchValue || !mergedShowSearch) {
         return [...mergedOptions] as OptionsType;
       }
+
+      let option: typeof filterOption | 'pinyin' = filterOption;
+
+      if (!onSearch) {
+        if (mode === 'combobox' && filterOption === undefined) {
+          option = 'pinyin';
+        } else if (filterOption === undefined) {
+          option = 'pinyin';
+        } else {
+          option = filterOption;
+        }
+      }
+
       const filteredOptions: OptionsType = filterOptions(mergedSearchValue, mergedOptions, {
         optionFilterProp,
-        filterOption: mode === 'combobox' && filterOption === undefined ? () => true : filterOption,
+        filterOption: option,
       });
       if (
         mode === 'tags' &&

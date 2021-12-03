@@ -50,7 +50,7 @@ export type FilterOptions<OptionsType extends object[]> = (
   /** Component props, since Select & TreeSelect use different prop name, use any here */
   config: {
     optionFilterProp: string;
-    filterOption: boolean | FilterFunc<OptionsType[number]>;
+    filterOption: boolean | FilterFunc<OptionsType[number]> | 'pinyin';
   },
 ) => OptionsType;
 

@@ -1,0 +1,35 @@
+{
+    "name": "@dpdfe/antd-pinyin-select",
+    "version": "0.0.2",
+    "main": "./lib/select",
+    "module": "./es/select",
+    "types": "./lib/select.d.ts",
+    "repository": "https://github.com/DPDFE/antd-react-components.git",
+    "author": "DPDFE",
+    "scripts": {
+        "dev": "vite",
+        "build": "father build",
+        "serve": "vite preview",
+        "pub": "npm run build && npm publish --access public"
+    },
+    "peerDependencies": {
+        "antd": "*",
+        "react": "*",
+        "react-dom": "*"
+    },
+    "dependencies": {
+        "@dpdfe/tools": "^0.0.5",
+        "js-levenshtein": "^1.1.6"
+    },
+    "devDependencies": {
+        "@types/react": "^17.0.0",
+        "@types/react-dom": "^17.0.0",
+        "@vitejs/plugin-react": "^1.0.0",
+        "antd": "4",
+        "father": "^2.30.13",
+        "less": "3",
+        "typescript": "^4.3.2",
+        "vite": "^2.6.4"
+    },
+    "license": "MIT"
+}
