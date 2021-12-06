@@ -8,7 +8,7 @@ antd react 组件库拓展
 
 ### 安装
 
-    `npm install --save @dpdfe/antd-pinyin-select babel-plugin-import`
+    npm install --save @dpdfe/antd-pinyin-select babel-plugin-import
 
 ### 使用方式
 
@@ -27,7 +27,7 @@ antd react 组件库拓展
             [
                 "import",
                 {
-                    "libraryName": "antd-pinyin-select",
+                    "libraryName": "antd",
                     "style": true,
                     customName: (name, file) => {
 
@@ -50,11 +50,13 @@ antd react 组件库拓展
 
 ### 安装
 
-    `npm install --save @dpdfe/rc-pinyin-select`
+    npm install --save @dpdfe/rc-pinyin-select
 
 ### 使用方式
 
-    ```javascript
+配置webpack的alias    
+
+
     // file: webpack.config.js
     {
         resolve: {
@@ -64,4 +66,4 @@ antd react 组件库拓展
         }
     }
 
-    ```
+
