@@ -32,7 +32,7 @@ antd react 组件库拓展
                     customName: (name, file) => {
 
                         if (name === 'select') {
-                            return '@dpdfe/antd-pinyin-select/es/select';
+                            return '@dpdfe/antd-pinyin-select/es';
                         }
 
                         return `antd/es/${name}`;
