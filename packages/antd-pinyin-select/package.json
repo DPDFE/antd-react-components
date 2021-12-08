@@ -1,6 +1,6 @@
 {
     "name": "@dpdfe/antd-pinyin-select",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "main": "./lib/select",
     "module": "./es/select",
     "types": "./lib/select.d.ts",

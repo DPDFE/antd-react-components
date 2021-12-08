@@ -32,8 +32,6 @@ const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
 
             // 如果有groupOption的层级，暂不支持
             if (input === '' || is_group_option) {
-                console.log(originNode);
-
                 return originNode;
             }
 
@@ -58,7 +56,7 @@ const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
 
             return React.cloneElement(originNode, {
                 options: res,
-                flattenOptions: res.map(o => ({
+                flattenOptions: res.map((o) => ({
                     ...originNode.props.flattenOptions.find(
                         (fo: any) => fo.key === (o.key ? o.key : o.value),
                     ),
@@ -79,7 +77,7 @@ const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
 };
 
 const SelectRef = React.forwardRef(InternalSelect) as <
-    VT extends SelectValue = SelectValue
+    VT extends SelectValue = SelectValue,
 >(
     props: SelectProps<VT> & {ref?: React.Ref<RefSelectProps>},
 ) => React.ReactElement;

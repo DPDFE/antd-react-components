@@ -41,7 +41,6 @@ var InternalSelect = function InternalSelect(props, ref) {
     var is_group_option = originNode.props.flattenOptions.length !== originNode.props.options.length; // 如果有groupOption的层级，暂不支持
 
     if (input === '' || is_group_option) {
-      console.log(originNode);
       return originNode;
     }
 
