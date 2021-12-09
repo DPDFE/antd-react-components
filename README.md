@@ -6,7 +6,7 @@ antd react 组件库拓展
 
 二次封装 antd 的 Select 组件，支持拼音模糊搜索。
 
-如果项目中使用 AntD 及 Webpack，可使用此方式，无需修改代码，即可一键支持拼音搜索。
+如果项目中使用 AntD 及 Babel，可使用此方式，无需修改代码，即可一键支持拼音搜索。
 
 [使用指南](https://github.com/DPDFE/antd-react-components/wiki/antd-pinyin-select)
 
