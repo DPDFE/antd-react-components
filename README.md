@@ -13,24 +13,6 @@ antd react 组件库拓展
 
 ## rc-pinyin-select
 
--   改造 antd Select 依赖的 rc-select，使 Select 支持拼音搜索
+已不推荐使用，请使用上述 antd-pinyin-select
 
-### 安装
-
-    npm install --save @dpdfe/rc-pinyin-select
-
-### 使用方式
-
-配置webpack的alias    
-
-
-    // file: webpack.config.js
-    {
-        resolve: {
-            alias: {
-                'rc-select': '@dpdfe/rc-pinyin-select',
-            }
-        }
-    }
-
-
+[使用指南](https://github.com/DPDFE/antd-react-components/wiki/rc-pinyin-select)
