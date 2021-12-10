@@ -3,12 +3,14 @@ import {pinYinFuzzSearch} from '@dpdfe/tools';
 import {Select as AntdSelect, SelectProps} from 'antd';
 import {RefSelectProps} from 'rc-select';
 import {SelectValue} from 'antd/lib/select';
-
+import {PinYinFuzzSearchOption} from '@dpdfe/tools/dist/pinyin_search';
 const {Option, OptGroup, SECRET_COMBOBOX_MODE_DO_NOT_USE} = AntdSelect;
 
 type AntSelectType = typeof AntdSelect;
 
-interface Props extends SelectProps<SelectValue> {}
+interface Props
+    extends SelectProps<SelectValue>,
+        PinYinFuzzSearchOption<SelectValue> {}
 
 const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
     // 用来存储匹配后的结果, 减少重复匹配的工作量
@@ -47,8 +49,15 @@ const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
                 const is_children = !props.options;
 
                 res = pinYinFuzzSearch(input, originNode.props.options, {
-                    textProvider: (item: any) =>
-                        is_children ? item.children : item[optionFilterProp],
+                    textProvider: props?.textProvider
+                        ? props.textProvider
+                        : (item: any) =>
+                              is_children
+                                  ? item.children
+                                  : item[optionFilterProp],
+                    sort: props?.sort ? props.sort : 'AUTO',
+                    multiple: props?.multiple ? props.multiple : 'ANY',
+                    separator: props?.separator ? props.separator : ' ',
                 });
 
                 input_res_map.set(input, res);
@@ -56,7 +65,7 @@ const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
 
             return React.cloneElement(originNode, {
                 options: res,
-                flattenOptions: res.map((o) => ({
+                flattenOptions: res.map(o => ({
                     ...originNode.props.flattenOptions.find(
                         (fo: any) => fo.key === (o.key ? o.key : o.value),
                     ),
@@ -77,12 +86,16 @@ const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
 };
 
 const SelectRef = React.forwardRef(InternalSelect) as <
-    VT extends SelectValue = SelectValue,
+    VT extends SelectValue = SelectValue
 >(
-    props: SelectProps<VT> & {ref?: React.Ref<RefSelectProps>},
+    props: SelectProps<VT> & {
+        ref?: React.Ref<RefSelectProps>;
+    } & PinYinFuzzSearchOption<VT>,
 ) => React.ReactElement;
 
-const Select: AntSelectType = SelectRef as AntSelectType;
+type MyAntSelectType = typeof SelectRef & AntSelectType;
+
+const Select: MyAntSelectType = SelectRef as MyAntSelectType;
 
 Select.SECRET_COMBOBOX_MODE_DO_NOT_USE = SECRET_COMBOBOX_MODE_DO_NOT_USE;
 Select.Option = Option;

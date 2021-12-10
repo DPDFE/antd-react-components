@@ -1,11 +1,17 @@
 {
     "name": "@dpdfe/antd-pinyin-select",
-    "version": "0.0.3",
+    "version": "0.0.5",
     "main": "./lib/select",
     "module": "./es/select",
     "types": "./lib/select.d.ts",
     "repository": "https://github.com/DPDFE/antd-react-components.git",
     "author": "DPDFE",
+    "keywords": [
+        "antd",
+        "pinyin",
+        "select",
+        "拼音"
+    ],
     "scripts": {
         "dev": "vite",
         "build": "father build",

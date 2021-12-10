@@ -1,11 +1,11 @@
 {
-  "name": "antd-react-components",
-  "version": "0.0.1",
-  "main": "index.js",
-  "repository": "https://github.com/DPDFE/antd-react-components.git",
-  "author": "DPDFE",
-  "license": "MIT",
-  "devDependencies": {
-    "lerna": "^4.0.0"
-  }
+    "name": "antd-react-components",
+    "version": "0.0.1",
+    "main": "index.js",
+    "repository": "https://github.com/DPDFE/antd-react-components.git",
+    "author": "DPDFE",
+    "license": "MIT",
+    "devDependencies": {
+        "lerna": "^4.0.0"
+    }
 }

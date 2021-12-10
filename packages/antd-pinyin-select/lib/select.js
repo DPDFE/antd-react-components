@@ -52,9 +52,12 @@ var InternalSelect = function InternalSelect(props, ref) {
       var optionFilterProp = (props === null || props === void 0 ? void 0 : props.optionFilterProp) ? props.optionFilterProp : 'label';
       var is_children = !props.options;
       res = (0, _tools.pinYinFuzzSearch)(input, originNode.props.options, {
-        textProvider: function textProvider(item) {
+        textProvider: (props === null || props === void 0 ? void 0 : props.textProvider) ? props.textProvider : function (item) {
           return is_children ? item.children : item[optionFilterProp];
-        }
+        },
+        sort: (props === null || props === void 0 ? void 0 : props.sort) ? props.sort : 'AUTO',
+        multiple: (props === null || props === void 0 ? void 0 : props.multiple) ? props.multiple : 'ANY',
+        separator: (props === null || props === void 0 ? void 0 : props.separator) ? props.separator : ' '
       });
       input_res_map.set(input, res);
     }

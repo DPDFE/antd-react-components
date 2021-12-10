@@ -4,7 +4,7 @@
 
 ### 安装
 
-    `npm install --save @dpdfe/antd-pinyin-select babel-plugin-import`
+`npm install --save @dpdfe/antd-pinyin-select babel-plugin-import`
 
 ### 使用方式
 
@@ -39,3 +39,7 @@
     }
 
     ```
+
+### 更多
+
+[使用指南](https://github.com/DPDFE/antd-react-components/wiki/antd-pinyin-select)

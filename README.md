@@ -8,8 +8,9 @@ antd react 组件库拓展
 
 如果项目中使用 AntD 及 Babel，可使用此方式，无需修改代码，即可一键支持拼音搜索。
 
-[使用指南](https://github.com/DPDFE/antd-react-components/wiki/antd-pinyin-select)
+![示例]('https://raw.githubusercontent.com/DPDFE/antd-react-components/imgs/antd-pinyin-select.gif')
 
+[使用指南](https://github.com/DPDFE/antd-react-components/wiki/antd-pinyin-select)
 
 ## rc-pinyin-select
 
