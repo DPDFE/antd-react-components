@@ -56,7 +56,14 @@ var InternalSelect = function InternalSelect(props, ref) {
         }));
       })
     });
-  }, [props]);
+  }, [props]); // 如果有自定义的onSearch，直接返回antd的select
+
+  if (props.onSearch) {
+    return /*#__PURE__*/React.createElement(AntdSelect, _extends({
+      ref: ref
+    }, props));
+  }
+
   return /*#__PURE__*/React.createElement(AntdSelect, _extends({
     ref: ref,
     filterOption: false,

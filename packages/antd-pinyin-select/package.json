@@ -1,6 +1,6 @@
 {
     "name": "@dpdfe/antd-pinyin-select",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "main": "./lib/select",
     "module": "./es/select",
     "types": "./lib/select.d.ts",
@@ -24,7 +24,7 @@
         "react-dom": "*"
     },
     "dependencies": {
-        "@dpdfe/tools": "^0.0.5",
+        "@dpdfe/tools": "^0.0.9",
         "js-levenshtein": "^1.1.6"
     },
     "devDependencies": {

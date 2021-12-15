@@ -75,6 +75,11 @@ const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
         [props],
     );
 
+    // 如果有自定义的onSearch，直接返回antd的select
+    if (props.onSearch) {
+        return <AntdSelect ref={ref} {...props}></AntdSelect>;
+    }
+
     return (
         <AntdSelect
             ref={ref}
