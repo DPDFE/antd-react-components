@@ -9,6 +9,9 @@
         "dev": "vite",
         "build:demo": "vite build"
     },
+    "dependencies": {
+        "@dpdfe/tools": "^0.0.9"
+    },
     "devDependencies": {
         "lerna": "^4.0.0",
         "@types/react": "^17.0.0",
