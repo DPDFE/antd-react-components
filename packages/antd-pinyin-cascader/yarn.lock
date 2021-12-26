@@ -262,9 +262,9 @@
   version "3.4.0"
   resolved "https://registry.nlark.com/@ctrl/tinycolor/download/@ctrl/tinycolor-3.4.0.tgz#c3c5ae543c897caa9c2a68630bed355be5f9990f"
 
-"@dpdfe/tools@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@dpdfe/tools/-/tools-0.0.7.tgz#da1902b8e7f0aadbcae4e42cea05e15f050e773a"
+"@dpdfe/tools@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@dpdfe/tools/-/tools-0.0.9.tgz#be99d45f0f44d2493730d916dfec1ec5d5f7dd43"
   dependencies:
     js-levenshtein "^1.1.6"
 
@@ -741,12 +741,6 @@ pify@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
 
-pinyin-match@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/pinyin-match/-/pinyin-match-1.2.2.tgz#24a60a5bce89fb2903f33f37492782d3f8e34eeb"
-  dependencies:
-    rollup "^2.44.0"
-
 postcss@^8.3.11:
   version "8.4.5"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.5.tgz#bae665764dfd4c6fcc24dc0fdf7e7aa00cc77f95"
@@ -1109,7 +1103,7 @@ resolve@^1.20.0:
     is-core-module "^2.2.0"
     path-parse "^1.0.6"
 
-rollup@^2.44.0, rollup@^2.59.0:
+rollup@^2.59.0:
   version "2.61.1"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.61.1.tgz#1a5491f84543cf9e4caf6c61222d9a3f8f2ba454"
   optionalDependencies:
