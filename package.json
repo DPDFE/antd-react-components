@@ -5,7 +5,19 @@
     "repository": "https://github.com/DPDFE/antd-react-components.git",
     "author": "DPDFE",
     "license": "MIT",
+    "scripts": {
+        "dev": "vite",
+        "build:demo": "vite build"
+    },
     "devDependencies": {
-        "lerna": "^4.0.0"
+        "lerna": "^4.0.0",
+        "@types/react": "^17.0.0",
+        "@types/react-dom": "^17.0.0",
+        "react": "^17.0.0",
+        "react-dom": "^17.0.0",
+        "@vitejs/plugin-react": "^1.0.0",
+        "antd": "4",
+        "less": "3",
+        "vite": "^2.6.4"
     }
 }
