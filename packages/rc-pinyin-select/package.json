@@ -1,6 +1,6 @@
 {
   "name": "@dpdfe/rc-pinyin-select",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "React Select",
   "engines": {
     "node": ">=8.x"
@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.10.1",
-    "@dpdfe/tools": "^0.0.5",
+    "@dpdfe/tools": "^0.0.9",
     "classnames": "2.x",
     "rc-motion": "^2.0.1",
     "rc-overflow": "^1.0.0",
