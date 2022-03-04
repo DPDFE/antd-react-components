@@ -6,7 +6,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-import React from 'react';
+import React, { useEffect, useCallback, cloneElement, forwardRef, isValidElement } from 'react';
+import { renderToString } from 'react-dom/server';
 import { pinYinFuzzSearch } from '@dpdfe/tools';
 import { Select as AntdSelect } from 'antd';
 var Option = AntdSelect.Option,
@@ -16,13 +17,13 @@ var Option = AntdSelect.Option,
 var InternalSelect = function InternalSelect(props, ref) {
   // 用来存储匹配后的结果, 减少重复匹配的工作量
   var input_res_map = new Map();
-  React.useEffect(function () {
+  useEffect(function () {
     input_res_map = new Map();
     return function () {
       input_res_map = new Map();
     };
   }, [props]);
-  var dropdownRenderer = React.useCallback(function (originNode) {
+  var dropdownRenderer = useCallback(function (originNode) {
     var input = originNode.props.searchValue;
     var is_group_option = originNode.props.flattenOptions.length !== originNode.props.options.length; // 如果有groupOption的层级，暂不支持
 
@@ -39,7 +40,7 @@ var InternalSelect = function InternalSelect(props, ref) {
       var is_children = !props.options;
       res = pinYinFuzzSearch(input, originNode.props.options, {
         textProvider: (props === null || props === void 0 ? void 0 : props.textProvider) ? props.textProvider : function (item) {
-          return is_children ? item.children : item[optionFilterProp];
+          return is_children ? convertJsxToString(item.children) : convertJsxToString(item[optionFilterProp]);
         },
         sort: (props === null || props === void 0 ? void 0 : props.sort) ? props.sort : 'AUTO',
         multiple: (props === null || props === void 0 ? void 0 : props.multiple) ? props.multiple : 'ANY',
@@ -48,7 +49,7 @@ var InternalSelect = function InternalSelect(props, ref) {
       input_res_map.set(input, res);
     }
 
-    return /*#__PURE__*/React.cloneElement(originNode, {
+    return /*#__PURE__*/cloneElement(originNode, {
       options: res,
       flattenOptions: res.map(function (o) {
         return _objectSpread({}, originNode.props.flattenOptions.find(function (fo) {
@@ -63,8 +64,22 @@ var InternalSelect = function InternalSelect(props, ref) {
     dropdownRender: dropdownRenderer
   }, props));
 };
+/**
+ * 转化option里潜在的ReactElement为string，避免报错
+ * @param origin_input - option
+ */
 
-var SelectRef = /*#__PURE__*/React.forwardRef(InternalSelect);
+
+function convertJsxToString(origin_input) {
+  if ( /*#__PURE__*/isValidElement(origin_input)) {
+    var html = renderToString(origin_input) || '';
+    return new DOMParser().parseFromString(html, 'text/html').documentElement.textContent;
+  }
+
+  return origin_input;
+}
+
+var SelectRef = /*#__PURE__*/forwardRef(InternalSelect);
 var Select = SelectRef;
 Select.SECRET_COMBOBOX_MODE_DO_NOT_USE = SECRET_COMBOBOX_MODE_DO_NOT_USE;
 Select.Option = Option;

@@ -34,11 +34,15 @@ function Demo() {
       marginRight: 20,
       width: 240
     }
-  }, provinces.map(function (value) {
+  }, provinces.map(function (value, index) {
     return /*#__PURE__*/React.createElement(Option, {
       value: value,
       key: value
-    }, value);
+    }, index % 5 === 0 ? /*#__PURE__*/React.createElement("span", null, value, /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'red'
+      }
+    }, "(", value.split('').reverse().join(''), ")"), "\u652F\u6301jsx") : value);
   })), /*#__PURE__*/React.createElement(ASelect, {
     showSearch: true,
     ref: ref2,

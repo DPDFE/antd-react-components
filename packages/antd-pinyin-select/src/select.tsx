@@ -1,4 +1,13 @@
-import React from 'react';
+import React, {
+    useEffect,
+    useCallback,
+    ReactElement,
+    Ref,
+    cloneElement,
+    forwardRef,
+    isValidElement,
+} from 'react';
+import {renderToString} from 'react-dom/server';
 import {pinYinFuzzSearch} from '@dpdfe/tools';
 import {Select as AntdSelect, SelectProps} from 'antd';
 import {RefSelectProps} from 'rc-select';
@@ -12,11 +21,11 @@ interface Props
     extends SelectProps<SelectValue>,
         PinYinFuzzSearchOption<SelectValue> {}
 
-const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
+const InternalSelect = (props: Props, ref: Ref<RefSelectProps>) => {
     // 用来存储匹配后的结果, 减少重复匹配的工作量
     let input_res_map = new Map<string, any[]>();
 
-    React.useEffect(() => {
+    useEffect(() => {
         input_res_map = new Map<string, any[]>();
 
         return () => {
@@ -24,8 +33,8 @@ const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
         };
     }, [props]);
 
-    const dropdownRenderer = React.useCallback(
-        (originNode: React.ReactElement) => {
+    const dropdownRenderer = useCallback(
+        (originNode: ReactElement) => {
             const input = originNode.props.searchValue;
 
             const is_group_option =
@@ -53,8 +62,8 @@ const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
                         ? props.textProvider
                         : (item: any) =>
                               is_children
-                                  ? item.children
-                                  : item[optionFilterProp],
+                                  ? convertJsxToString(item.children)
+                                  : convertJsxToString(item[optionFilterProp]),
                     sort: props?.sort ? props.sort : 'AUTO',
                     multiple: props?.multiple ? props.multiple : 'ANY',
                     separator: props?.separator ? props.separator : ' ',
@@ -63,9 +72,9 @@ const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
                 input_res_map.set(input, res);
             }
 
-            return React.cloneElement(originNode, {
+            return cloneElement(originNode, {
                 options: res,
-                flattenOptions: res.map(o => ({
+                flattenOptions: res.map((o) => ({
                     ...originNode.props.flattenOptions.find(
                         (fo: any) => fo.key === (o.key ? o.key : o.value),
                     ),
@@ -85,13 +94,26 @@ const InternalSelect = (props: Props, ref: React.Ref<RefSelectProps>) => {
     );
 };
 
-const SelectRef = React.forwardRef(InternalSelect) as <
-    VT extends SelectValue = SelectValue
+/**
+ * 转化option里潜在的ReactElement为string，避免报错
+ * @param origin_input - option
+ */
+function convertJsxToString(origin_input: string | ReactElement): string {
+    if (isValidElement(origin_input)) {
+        const html = renderToString(origin_input) || '';
+        return new DOMParser().parseFromString(html, 'text/html')
+            .documentElement.textContent;
+    }
+    return origin_input;
+}
+
+const SelectRef = forwardRef(InternalSelect) as <
+    VT extends SelectValue = SelectValue,
 >(
     props: SelectProps<VT> & {
-        ref?: React.Ref<RefSelectProps>;
+        ref?: Ref<RefSelectProps>;
     } & PinYinFuzzSearchOption<VT>,
-) => React.ReactElement;
+) => ReactElement;
 
 type MyAntSelectType = typeof SelectRef & AntSelectType;
 
