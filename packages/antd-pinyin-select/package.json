@@ -1,6 +1,6 @@
 {
     "name": "@dpdfe/antd-pinyin-select",
-    "version": "0.0.6",
+    "version": "0.0.8",
     "main": "./lib/select",
     "module": "./es/select",
     "types": "./lib/select.d.ts",
@@ -16,7 +16,7 @@
         "dev": "vite",
         "build": "father build",
         "serve": "vite preview",
-        "pub": "npm run build && npm publish --access public"
+        "pub": "npm run build && npm publish --access public --registry=https://registry.npmjs.org/"
     },
     "peerDependencies": {
         "antd": "*",

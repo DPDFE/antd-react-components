@@ -6,10 +6,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-import React, { useEffect, useCallback, cloneElement, forwardRef, isValidElement } from 'react';
-import { renderToString } from 'react-dom/server';
-import { pinYinFuzzSearch } from '@dpdfe/tools';
 import { Select as AntdSelect } from 'antd';
+import React, { cloneElement, forwardRef, isValidElement, useCallback, useEffect } from 'react';
+import { pinYinFuzzSearch } from '@dpdfe/tools';
+import { renderToString } from 'react-dom/server';
 var Option = AntdSelect.Option,
     OptGroup = AntdSelect.OptGroup,
     SECRET_COMBOBOX_MODE_DO_NOT_USE = AntdSelect.SECRET_COMBOBOX_MODE_DO_NOT_USE;
@@ -65,18 +65,29 @@ var InternalSelect = function InternalSelect(props, ref) {
   }, props));
 };
 /**
- * 转化option里潜在的ReactElement为string，避免报错
+ * 转化option里潜在的 ReactElement| ReactElement[] 为string，避免报错
  * @param origin_input - option
  */
 
 
 function convertJsxToString(origin_input) {
-  if ( /*#__PURE__*/isValidElement(origin_input)) {
-    var html = renderToString(origin_input) || '';
-    return new DOMParser().parseFromString(html, 'text/html').documentElement.textContent;
+  var node_children = [];
+
+  if (Array.isArray(origin_input)) {
+    node_children = origin_input;
+  } else {
+    node_children = [origin_input];
   }
 
-  return origin_input;
+  var string_input = node_children.map(function (child) {
+    if ( /*#__PURE__*/isValidElement(child)) {
+      var html = renderToString(child) || '';
+      return new DOMParser().parseFromString(html, 'text/html').documentElement.textContent;
+    }
+
+    return child;
+  }).join('');
+  return string_input;
 }
 
 var SelectRef = /*#__PURE__*/forwardRef(InternalSelect);

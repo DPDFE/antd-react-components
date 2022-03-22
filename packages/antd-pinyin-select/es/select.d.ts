@@ -1,8 +1,8 @@
-import { ReactElement, Ref } from 'react';
 import { Select as AntdSelect, SelectProps } from 'antd';
+import { ReactElement, Ref } from 'react';
+import { PinYinFuzzSearchOption } from '@dpdfe/tools/dist/pinyin_search';
 import { RefSelectProps } from 'rc-select';
 import { SelectValue } from 'antd/lib/select';
-import { PinYinFuzzSearchOption } from '@dpdfe/tools/dist/pinyin_search';
 declare type AntSelectType = typeof AntdSelect;
 declare const SelectRef: <VT extends SelectValue = SelectValue>(props: SelectProps<VT> & {
     ref?: Ref<RefSelectProps>;

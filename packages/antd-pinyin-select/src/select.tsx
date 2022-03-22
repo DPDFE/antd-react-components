@@ -1,18 +1,20 @@
+import {Select as AntdSelect, SelectProps} from 'antd';
 import React, {
-    useEffect,
-    useCallback,
     ReactElement,
     Ref,
     cloneElement,
     forwardRef,
     isValidElement,
+    useCallback,
+    useEffect,
 } from 'react';
-import {renderToString} from 'react-dom/server';
-import {pinYinFuzzSearch} from '@dpdfe/tools';
-import {Select as AntdSelect, SelectProps} from 'antd';
+
+import {PinYinFuzzSearchOption} from '@dpdfe/tools/dist/pinyin_search';
 import {RefSelectProps} from 'rc-select';
 import {SelectValue} from 'antd/lib/select';
-import {PinYinFuzzSearchOption} from '@dpdfe/tools/dist/pinyin_search';
+import {pinYinFuzzSearch} from '@dpdfe/tools';
+import {renderToString} from 'react-dom/server';
+
 const {Option, OptGroup, SECRET_COMBOBOX_MODE_DO_NOT_USE} = AntdSelect;
 
 type AntSelectType = typeof AntdSelect;
@@ -74,7 +76,7 @@ const InternalSelect = (props: Props, ref: Ref<RefSelectProps>) => {
 
             return cloneElement(originNode, {
                 options: res,
-                flattenOptions: res.map((o) => ({
+                flattenOptions: res.map(o => ({
                     ...originNode.props.flattenOptions.find(
                         (fo: any) => fo.key === (o.key ? o.key : o.value),
                     ),
@@ -95,20 +97,36 @@ const InternalSelect = (props: Props, ref: Ref<RefSelectProps>) => {
 };
 
 /**
- * 转化option里潜在的ReactElement为string，避免报错
+ * 转化option里潜在的 ReactElement| ReactElement[] 为string，避免报错
  * @param origin_input - option
  */
-function convertJsxToString(origin_input: string | ReactElement): string {
-    if (isValidElement(origin_input)) {
-        const html = renderToString(origin_input) || '';
-        return new DOMParser().parseFromString(html, 'text/html')
-            .documentElement.textContent;
+function convertJsxToString(
+    origin_input: string | ReactElement | ReactElement[],
+): string {
+    let node_children = [] as any[];
+
+    if (Array.isArray(origin_input)) {
+        node_children = origin_input;
+    } else {
+        node_children = [origin_input];
     }
-    return origin_input;
+
+    const string_input = node_children
+        .map(child => {
+            if (isValidElement(child)) {
+                const html = renderToString(child) || '';
+                return new DOMParser().parseFromString(html, 'text/html')
+                    .documentElement.textContent;
+            }
+            return child;
+        })
+        .join('');
+
+    return string_input;
 }
 
 const SelectRef = forwardRef(InternalSelect) as <
-    VT extends SelectValue = SelectValue,
+    VT extends SelectValue = SelectValue
 >(
     props: SelectProps<VT> & {
         ref?: Ref<RefSelectProps>;

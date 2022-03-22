@@ -7,13 +7,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+require("antd/es/select/style/index");
 
-var _select = require("./select");
+var _react = _interopRequireWildcard(require("react"));
 
 var _antd = require("antd");
 
-require("antd/es/select/style/index");
+var _select = require("./select");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -54,11 +54,11 @@ function Demo() {
     return /*#__PURE__*/_react.default.createElement(Option, {
       value: value,
       key: value
-    }, index % 5 === 0 ? /*#__PURE__*/_react.default.createElement("span", null, value, /*#__PURE__*/_react.default.createElement("span", {
+    }, value, /*#__PURE__*/_react.default.createElement("span", {
       style: {
         color: 'red'
       }
-    }, "(", value.split('').reverse().join(''), ")"), "\u652F\u6301jsx") : value);
+    }, "(", value.split('').reverse().join(''), ")"), "\u652F\u6301jsx");
   })), /*#__PURE__*/_react.default.createElement(_antd.Select, {
     showSearch: true,
     ref: ref2,

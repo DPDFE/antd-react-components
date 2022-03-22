@@ -7,13 +7,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = exports.Select = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _antd = require("antd");
 
-var _server = require("react-dom/server");
+var _react = _interopRequireWildcard(require("react"));
 
 var _tools = require("@dpdfe/tools");
 
-var _antd = require("antd");
+var _server = require("react-dom/server");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -82,18 +82,29 @@ var InternalSelect = function InternalSelect(props, ref) {
   }, props));
 };
 /**
- * 转化option里潜在的ReactElement为string，避免报错
+ * 转化option里潜在的 ReactElement| ReactElement[] 为string，避免报错
  * @param origin_input - option
  */
 
 
 function convertJsxToString(origin_input) {
-  if ( /*#__PURE__*/(0, _react.isValidElement)(origin_input)) {
-    var html = (0, _server.renderToString)(origin_input) || '';
-    return new DOMParser().parseFromString(html, 'text/html').documentElement.textContent;
+  var node_children = [];
+
+  if (Array.isArray(origin_input)) {
+    node_children = origin_input;
+  } else {
+    node_children = [origin_input];
   }
 
-  return origin_input;
+  var string_input = node_children.map(function (child) {
+    if ( /*#__PURE__*/(0, _react.isValidElement)(child)) {
+      var html = (0, _server.renderToString)(child) || '';
+      return new DOMParser().parseFromString(html, 'text/html').documentElement.textContent;
+    }
+
+    return child;
+  }).join('');
+  return string_input;
 }
 
 var SelectRef = /*#__PURE__*/(0, _react.forwardRef)(InternalSelect);
